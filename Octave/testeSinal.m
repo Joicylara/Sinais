@@ -1,0 +1,55 @@
+clc; clear;
+nota_LA = 440;
+nota_SI = 494;
+nota_DO = 262;
+nota_RE = 294;
+nota_MI = 330;
+nota_FA = 349;
+nota_SOL = 392;
+fs = 41000;
+Ts = 1/fs;
+tmax = 1;
+t = 0:Ts:tmax;
+A = 1;
+sinal = A * sin(2*pi*nota_DO*t);
+sinal1 = A * sin(2*pi*nota_RE*t);
+sinal2 = A * sin(2*pi*nota_MI*t);
+sinal3 = A * sin(2*pi*nota_FA*t);
+sinal4 = A * sin(2*pi*nota_SOL*t);
+sinal5 = A * sin(2*pi*nota_LA*t);
+sinal6 = A * sin(2*pi*nota_SI*t);
+sinal7 = A * sin(2*pi*nota_DO*t);
+
+sound(sinal,fs);
+sound(sinal1,fs);
+sound(sinal2,fs);
+sound(sinal3,fs);
+sound(sinal4,fs);
+sound(sinal5,fs);
+sound(sinal6,fs);
+sound(sinal7,fs);
+%amortecimento
+am = max(t)/(3*tmax); %1/3
+k = exp(-t/am);
+sinal_am = A * sin(2*pi*nota_DO*t).*k;
+sinal_am1 = A * sin(2*pi*nota_RE*t).*k;
+sinal_am2 = A * sin(2*pi*nota_MI*t).*k;
+sinal_am3 = A * sin(2*pi*nota_FA*t).*k;
+sinal_am4 = A * sin(2*pi*nota_SOL*t).*k;
+sinal_am5 = A * sin(2*pi*nota_LA*t).*k;
+sinal_am6 = A * sin(2*pi*nota_SI*t).*k;
+sinal_am7 = A * sin(2*pi*nota_DO*t).*k;
+
+%sound(sinal_am,fs);
+%sound(sinal_am1,fs);
+%sound(sinal_am2,fs);
+%sound(sinal_am3,fs);
+%sound(sinal_am4,fs);
+%sound(sinal_am5,fs);
+%sound(sinal_am6,fs);
+%sound(sinal_am7,fs);
+subplot(2,1,1);
+plot(t,sinal);
+title('Sinal de Nota Musical');
+subplot(2,1,2);
+plot(t,sinal_am); title('Sinal Amortecido');
